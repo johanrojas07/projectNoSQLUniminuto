@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../services/firestore/firestore.service';
+import { Component, OnInit, Inject } from '@angular/core';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/providers/users/users.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-users',
@@ -11,14 +14,17 @@ export class UsersComponent implements OnInit {
 
   public documentId = null;
   public currentStatus = 1;
+  public users = [];
   public newUserForm = new FormGroup({
     nombre: new FormControl('', Validators.required),
     apellido: new FormControl('', Validators.required),
     id: new FormControl('')
   });
-  public users = [];
+
   constructor(
-    private firestoreService: FirestoreService
+    public dialogRef: MatDialogRef<UsersComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private userService: UserService
   ) {
     this.newUserForm.setValue({
       id: '',
@@ -26,8 +32,9 @@ export class UsersComponent implements OnInit {
       apellido: ''
     });
   }
+
   ngOnInit() {
-    this.firestoreService.getUsers().subscribe((usersSnapshot) => { // Se subscribe para ver cambios en esa coleccion
+    this.userService.getUsers().subscribe((usersSnapshot) => { // Se subscribe para ver cambios en esa coleccion
       this.users = [];
       usersSnapshot.forEach((catData: any) => { // Recorre cada uno de los usuarios agregados
         console.log(catData);
@@ -40,7 +47,7 @@ export class UsersComponent implements OnInit {
   }
 
   public editUser(documentId) {
-    const editSubscribe = this.firestoreService.getUser(documentId).subscribe((cat) => {
+    const editSubscribe = this.userService.getUser(documentId).subscribe((cat) => {
       this.currentStatus = 2;
       this.documentId = documentId;
       const data: any = cat.payload.data();
@@ -54,7 +61,7 @@ export class UsersComponent implements OnInit {
   }
 
   public deleteUser(documentId) {
-    this.firestoreService.deleteUser(documentId).then(() => {
+    this.userService.deleteUser(documentId).then(() => {
       console.log('Documento eliminado!');
     }, (error) => {
       console.error(error);
@@ -68,7 +75,7 @@ export class UsersComponent implements OnInit {
         nombre: form.nombre,
         apellido: form.apellido
       };
-      this.firestoreService.createUser(data).then(() => {
+      this.userService.createUser(data).then(() => {
         console.log('Documento creado exitósamente!');
         this.newUserForm.setValue({
           nombre: '',
@@ -83,7 +90,7 @@ export class UsersComponent implements OnInit {
         nombre: form.nombre,
         apellido: form.apellido
       };
-      this.firestoreService.updateUsers(documentId, data).then(() => {
+      this.userService.updateUsers(documentId, data).then(() => {
         this.currentStatus = 1;
         this.newUserForm.setValue({
           nombre: '',
@@ -95,6 +102,10 @@ export class UsersComponent implements OnInit {
         console.log(error);
       });
     }
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 
