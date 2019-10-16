@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { UsersComponent } from '../users/users.component';
 import { MateriasComponent } from '../materias/materias.component';
+import { StudentsComponent } from '../students/students.component';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   openUser() {
-    const dialogRef = this.dialog.open(UsersComponent, {
+    const dialogRef = this.dialog.open(StudentsComponent, {
       width: '800px',
       data: {}
     });

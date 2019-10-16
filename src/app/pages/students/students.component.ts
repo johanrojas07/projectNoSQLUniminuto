@@ -1,16 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from 'src/app/providers/users/users.service';
+
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StudentService } from 'src/app/providers/students/students.service';
 
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-students',
+  templateUrl: './students.component.html',
+  styleUrls: ['./students.component.css']
 })
-export class UsersComponent implements OnInit {
+export class StudentsComponent implements OnInit {
 
   public documentId = null;
   public currentStatus = 1;
@@ -22,9 +23,9 @@ export class UsersComponent implements OnInit {
   });
 
   constructor(
-    public dialogRef: MatDialogRef<UsersComponent>,
+    public dialogRef: MatDialogRef<StudentsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private userService: UserService
+    private userService: StudentService
   ) {
     this.newUserForm.setValue({
       id: '',
