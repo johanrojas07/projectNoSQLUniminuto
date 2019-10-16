@@ -327,9 +327,9 @@ button:focus {
 ============================================================================================ */
 .home_banner_area {
   z-index: 1;
-  min-height: 900px;
+  min-height: 700px;
   position: relative;
-  background: url('./img/home-banner.jpg') no-repeat center;
+  background: url('./img/home-banner-copia.jpg') no-repeat center;
   background-size: cover; 
 }
   .home_banner_area .banner_inner {
@@ -2750,6 +2750,15 @@ h6 {
   border-radius: 8px;
   cursor: pointer;
   border: 1px solid #f1f1f1; }
+  
+.mat-column-nombre,
+.mat-column-apellido {
+  width: 20%;
+}
+
+.mat-column-materias {
+  width: 60%;
+}
 
 .disabled-radio input:disabled {
   cursor: not-allowed;

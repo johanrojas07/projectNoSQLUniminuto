@@ -41,7 +41,7 @@
     <!--================ End Home Banner Area =================-->
 
     <!--================ Start Feature Area =================-->
-    <section class="feature_area section_gap_top">
+    <!-- <section class="feature_area section_gap_top">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5">
@@ -93,6 +93,53 @@
             </div>
           </div>
         </div>
+      </div>
+    </!--> 
+    <section class="feature_area" style="padding: 0">
+        <div class="container-fluid">
+           <div class="row justify-content-center">
+             <div class ="col-12">
+                <table mat-table [dataSource]="data"
+                matSort matSortActive="created" matSortDisableClear matSortDirection="desc" style="width: 100%;">
+                <!-- Number Column -->
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                  <td mat-cell *matCellDef="let row">{{row.data.nombre}}</td>
+                </ng-container>
+
+                <!-- Title Column -->
+                <ng-container matColumnDef="apellido">
+                  <th mat-header-cell *matHeaderCellDef>Apellido</th>
+                  <td mat-cell *matCellDef="let row">{{row.data.apellido}}</td>
+                </ng-container>
+
+                <!-- State Column -->
+                <ng-container matColumnDef="materias">
+                  <th mat-header-cell *matHeaderCellDef>Materias</th>
+                  <td mat-cell *matCellDef="let row">{{(row.textMaterias === '') ? 'NO TIENE MATERIAS INSCRITAS': row.textMaterias}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>   
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button color="warn" aria-label="Ver">
+                            <mat-icon>remove_red_eye</mat-icon>
+                          </button>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+             </div>
+             <div class="w-100"></div>
+             <div class="col">
+                <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+             </div>  
+        </div>
+        
       </div>
     </section>
     <!--================ End Feature Area =================-->

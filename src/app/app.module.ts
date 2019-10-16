@@ -14,6 +14,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StudentsComponent } from './pages/students/students.component';
 
+import {DemoMaterialModule} from './material-module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +25,7 @@ import { StudentsComponent } from './pages/students/students.component';
     HomeComponent
   ],
   imports: [
+    DemoMaterialModule,
     MatDialogModule,
     BrowserModule,
     AppRoutingModule,
