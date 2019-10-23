@@ -26,7 +26,34 @@ export class MateriasService {
     return this.firestore.collection('materias').doc(documentId).set(data);
   }
 
+  public usersInMateria(documentId: string): Promise<any> {
+      return new Promise((resolve, reject) => {
+          this.firestore.collection('materias').doc(documentId).collection('2019', (ref) => ref.where('active', '==', true))
+              .get().toPromise()
+              .then((response) => {
+                  resolve(response.size);
+              })
+              .catch((error) => {
+                  reject(error);
+              });
+      });
+  }
+
   public deleteMateria(documentId: string) {
     return this.firestore.collection('materias').doc(documentId).delete();
   }
+
+  public updateUserSubject(userId: string, subjectId: any, data: any) {
+    return new Promise((resolve, reject) => {
+      this.firestore.collection('materias').doc(subjectId)
+      .collection('2019').doc(userId).set(data)
+      .then(() => {
+        resolve(true);
+      })
+      .catch(() => {
+        reject(false);
+      });
+    });
+  }
+
 }

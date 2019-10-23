@@ -6,6 +6,7 @@ import { StudentProvider } from 'src/app/providers/students/students.provider';
 import { MateriasService } from 'src/app/providers/materias/materias.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
+import { EnrollSubjectsPerStudentComponent } from '../enrollSubjectsPerStudent/enrollSubjectsPerStudent.component';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getDataMaterias();
-    
+
   }
 
   openUser() {
@@ -39,7 +40,19 @@ export class HomeComponent implements OnInit {
       data: {}
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.getDataMaterias();
       console.log('The dialog was closed');
+    });
+  }
+
+  enRollSubjectsPerStudent() {
+    const dialogRef = this.dialog.open(EnrollSubjectsPerStudentComponent, {
+      disableClose: true,
+      width: '800px',
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getDataMaterias();
     });
   }
 
@@ -49,6 +62,7 @@ export class HomeComponent implements OnInit {
       data: {}
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.getDataMaterias();
       console.log('The dialog was closed');
     });
   }
@@ -77,6 +91,7 @@ export class HomeComponent implements OnInit {
 
   getDataMaterias() {
     this.materiasService.getMaterias().subscribe((data) => {
+      this.objectMaterias = {};
       data.forEach((materiasData: any) => {
         this.objectMaterias[materiasData.payload.doc.id] =  materiasData.payload.doc.data();
       });

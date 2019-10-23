@@ -12,7 +12,7 @@
 
   <body>
     <!--================ Start Header Menu Area =================-->
-    
+
     <!--================ End Header Menu Area =================-->
 
     <!--================ Start Home Banner Area =================-->
@@ -29,8 +29,11 @@
                   Crea Usuario Y Materias
                 </h2>
                 <div>
-                  <a class="primary-btn2 mb-3 mb-sm-0" (click)="openUser()">Crear Usuario</a>
+                  <a class="primary-btn2 mb-3 mb-sm-0" (click)="openUser()">Crear Estudiante</a>
                   <a class="primary-btn ml-sm-3 ml-0" (click)="openMateria()">Crear Materia</a>
+                </div>
+                <div style="padding-top: 5px; ">
+                  <a style="background: #ff90a0;" class="primary-btn2 mb-3 mb-sm-0" (click)="enRollSubjectsPerStudent()">Inscribir Materias a Estudiante</a>
                 </div>
               </div>
             </div>
@@ -94,7 +97,7 @@
           </div>
         </div>
       </div>
-    </!--> 
+    </!-->
     <section class="feature_area" style="padding: 0">
         <div class="container-fluid">
            <div class="row justify-content-center">
@@ -121,8 +124,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef> Acciones </th>   
-                    <td mat-cell *matCellDef="let element"> 
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let element">
                         <button mat-icon-button color="warn" aria-label="Ver">
                             <mat-icon>remove_red_eye</mat-icon>
                           </button>
@@ -137,9 +140,9 @@
              <div class="w-100"></div>
              <div class="col">
                 <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
-             </div>  
+             </div>
         </div>
-        
+
       </div>
     </section>
     <!--================ End Feature Area =================-->

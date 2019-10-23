@@ -69,4 +69,32 @@ export class StudentService {
   public deleteUser(documentId: string) {
     return this.firestore.collection('estudiantes').doc(documentId).delete();
   }
+
+  public validateIfEixstingSubjectInUser(userId: string, subjectId: string) {
+    console.log("validateIfEixstingSubjectInUser");
+    return new Promise((resolve, reject) => {
+      this.firestore.collection('estudiantes').doc(userId)
+      .collection('2019').doc(subjectId).get().toPromise()
+      .then((doc) => {
+          resolve(doc.exists);
+      })
+      .catch(() => {
+        reject(false);
+      });
+    });
+  }
+
+  public updateSubjectUser(userId: string, subjectId: any, data: any) {
+    return new Promise((resolve, reject) => {
+      this.firestore.collection('estudiantes').doc(userId)
+      .collection('2019').doc(subjectId).set(data)
+      .then(() => {
+        resolve(true);
+      })
+      .catch(() => {
+        reject(false);
+      });
+    });
+  }
+  
 }
