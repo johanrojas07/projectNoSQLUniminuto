@@ -70,24 +70,22 @@ export class EnrollSubjectsPerStudentComponent implements OnInit {
     let filterValue = '';
     console.log("value", value);
     if (value && value.data) {
-      console.log("")
       // if (!this.studentSelect || (value.ID !== this.studentSelect.ID)) {
-        this.studentSelect = value;
-        this.getStudentWithSubjects();
-        // this.refreshPrice();
+      this.studentSelect = value;
+      this.getStudentWithSubjects();
       // }
       filterValue = value.data.nombre.toLowerCase();
     } else {
       filterValue = (value) ? value.toLowerCase() : '';
     }
     // tslint:disable-next-line:max-line-length
-    console.log("his.students", this.students);
+    console.log('This.students', this.students);
     return this.students.filter(option => option.data.nombre.toLowerCase().includes(filterValue) || option.data.identificacion.toLowerCase().includes(filterValue));
   }
 
   public getStudentWithSubjects() {
     this.loading = true;
-    console.log("getStudentWithSubjects", this.studentSelect);
+    console.log('getStudentWithSubjects', this.studentSelect);
     this.studentService.getMateriasUser(this.studentSelect.id)
     .then((userSubjects: any[]) => {
       let subjectNoUsers= [];
