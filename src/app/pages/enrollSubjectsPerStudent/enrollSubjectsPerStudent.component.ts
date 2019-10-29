@@ -70,11 +70,12 @@ export class EnrollSubjectsPerStudentComponent implements OnInit {
     let filterValue = '';
     console.log("value", value);
     if (value && value.data) {
-      if (!this.studentSelect || (value.ID !== this.studentSelect.ID)) {
+      console.log("")
+      // if (!this.studentSelect || (value.ID !== this.studentSelect.ID)) {
         this.studentSelect = value;
         this.getStudentWithSubjects();
         // this.refreshPrice();
-      }
+      // }
       filterValue = value.data.nombre.toLowerCase();
     } else {
       filterValue = (value) ? value.toLowerCase() : '';
